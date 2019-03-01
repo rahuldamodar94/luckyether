@@ -11,9 +11,10 @@ const provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/7
 const web3 = new Web3(provider);
 var Account = require('./account');
 
-var count = 0;
+function createAccounts(){
+    var count = 0;
 
-for (i = 1; i >0; i++) {
+    for (i = 1; i > 0; i++) {
 
     var accountDetails = web3.eth.accounts.create();
 
@@ -45,5 +46,9 @@ for (i = 1; i >0; i++) {
         }).catch((err) => {
             console.log(err.message);
         })
-
+    }
 }
+
+var startCreate = setInterval(()=>{
+    createAccounts();
+},5000);
