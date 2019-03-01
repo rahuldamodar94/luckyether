@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+
 const options = { useNewUrlParser: true, useCreateIndex: true };
 
-mongoose.connect('mongodb://localhost:27017/account', options).then((suc) => {
-	console.log(suc);
-}).catch((err) => {
-	console.log(err.message);
-})
+mongoose.connect('mongodb://127.0.0.1:27017/account', options);
+var connection = mongoose.connection;
+connection.on("error",console.error.bind(console,"connection error"));
 
 const Web3 = require('web3');
 const provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/75aa7935112647bc8cc49d20beafa189');
