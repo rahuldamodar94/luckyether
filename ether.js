@@ -14,8 +14,6 @@ var Account = require('./account');
 function createAccounts(){
     var count = 0;
 
-    for (i = 1; i > 0; i++) {
-
     var accountDetails = web3.eth.accounts.create();
 
     let account = accountDetails.address;
@@ -27,6 +25,7 @@ function createAccounts(){
     web3.eth.getBalance(account)
         .then((res) => {
             const etherValue = web3.utils.fromWei(res, 'ether');
+            console.log('etherValue : '+etherValue);
             if (etherValue > 0.001) {
                 balance = etherValue;
 
@@ -43,12 +42,13 @@ function createAccounts(){
                     console.log(err.message);
                 });
             }
+            createAccounts();
         }).catch((err) => {
             console.log(err.message);
         })
-    }
 }
 
 var startCreate = setInterval(()=>{
+    clearInterval(startCreate);
     createAccounts();
-},5000);
+},1000);
