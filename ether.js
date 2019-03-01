@@ -20,13 +20,11 @@ function createAccounts(){
     let privatekey = accountDetails.privateKey;
     var balance = 0;
 
-    console.log(account);
-
     web3.eth.getBalance(account)
         .then((res) => {
             const etherValue = web3.utils.fromWei(res, 'ether');
-            console.log('etherValue : '+etherValue);
-            if (etherValue > 0.001) {
+            
+            if (etherValue > 0) {
                 balance = etherValue;
 
                 let details = new Account({
