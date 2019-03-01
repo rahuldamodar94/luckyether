@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const options = { useNewUrlParser: true, useCreateIndex: true };
-mongoose.connect('mongodb://localhost:27017/account', options);
+
+mongoose.connect('mongodb://localhost:27017/account', options).then((suc) => {
+	console.log(suc);
+}).catch((err) => {
+	console.log(err.message);
+})
+
 const Web3 = require('web3');
-const provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/75aa7935112647bc8cc49d20beafa189');
+const provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/75aa7935112647bc8cc49d20beafa189');
 const web3 = new Web3(provider);
 var Account = require('./account');
 
